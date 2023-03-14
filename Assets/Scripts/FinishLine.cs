@@ -13,7 +13,7 @@ public class FinishLine : MonoBehaviour
     bool finished = false;
     private void OnTriggerEnter2D(Collider2D other) {
         if (!finished && other.tag == "Player") {
-            Debug.Log("LETS FUCKING GOOOOOOO");
+            //Debug.Log("LETS FUCKING GOOOOOOO");
             Invoke("ReloadScene", reloadDelay);
             finishEffect.Play();
             GetComponent<AudioSource>().PlayOneShot(finishSFX);
@@ -24,7 +24,7 @@ public class FinishLine : MonoBehaviour
             //rb.AddForce(rb.velocity * -slowFactor);
 
             rb.velocity = rb.velocity * slowFactor;
-            Debug.Log($"POS: {rb.position} VEL: {rb.velocity} TOTAL: {rb.velocity * -slowFactor}");
+            //Debug.Log($"POS: {rb.position} VEL: {rb.velocity} TOTAL: {rb.velocity * -slowFactor}");
         }
         
     }
