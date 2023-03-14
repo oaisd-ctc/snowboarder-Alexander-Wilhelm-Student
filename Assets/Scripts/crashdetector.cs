@@ -7,14 +7,21 @@ public class crashdetector : MonoBehaviour
 {
     [SerializeField] float reloadDelay = 2;
     [SerializeField] ParticleSystem crashEffect;
+    [SerializeField] AudioClip crashSFX;
     public Collider2D crashTrigger;
     public LayerMask crashLayer;
 
+    bool dying = false;
+
     private void OnTriggerEnter2D(Collider2D other) { //instead of using just the other object's tag, we specify a collider on the gameobject to get more precise information about the collision
-        if (crashTrigger.IsTouchingLayers(crashLayer)) { // this also lets us specify exactly which trigger should do the collid
+        if (!dying && crashTrigger.IsTouchingLayers(crashLayer)) { // this also lets us specify exactly which trigger should do the collid
             Debug.Log("dumbass");
-            Invoke("ReloadScene", reloadDelay);
+            
             crashEffect.Play();
+            GetComponent<AudioSource>().PlayOneShot(crashSFX);
+            Invoke("ReloadScene", reloadDelay);
+            dying = true;
+            GetComponent<PlayerController>().alive = false;
         }
     }
 
